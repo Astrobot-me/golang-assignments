@@ -4,5 +4,11 @@ package practice
 // key becomes the corresponding value. Assume all values in m are unique.
 func InvertMap(m map[string]int) map[int]string {
 	// TODO: implement
-	return nil
+	ans := make(map[int]string)
+
+	for k, v := range m {
+		ans[v] = k
+	}
+
+	return ans
 }
