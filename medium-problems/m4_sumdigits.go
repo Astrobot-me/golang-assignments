@@ -11,7 +11,13 @@ import "fmt"
 
 func SumOfDigits(n int) int {
 	// TODO: implement
-	return 0
+	var sum int
+	sum = 0
+	for n > 0 {
+		sum = sum + n%10
+		n = n / 10
+	}
+	return sum
 }
 
 func main() {

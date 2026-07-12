@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Concepts: slices, range
 //
@@ -10,7 +12,20 @@ import "fmt"
 
 func FindMax(nums []int) int {
 	// TODO: implement
-	return 0
+
+	if len(nums) == 0 {
+		return 0
+	}
+
+	maxE := 0
+
+	for _, e := range nums {
+
+		maxE = max(e, maxE)
+
+	}
+
+	return maxE
 }
 
 func main() {

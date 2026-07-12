@@ -8,9 +8,15 @@ import "fmt"
 // Implement MinMax which returns both the minimum and maximum values in a
 // slice of ints as two separate return values.
 
-func MinMax(nums []int) (min int, max int) {
+func MinMax(nums []int) (int, int) {
 	// TODO: implement
-	return 0, 0
+	maxE := nums[0]
+	minE := nums[0]
+	for _, e := range nums {
+		maxE = max(e, maxE)
+		minE = min(e, minE)
+	}
+	return minE, maxE
 }
 
 func main() {

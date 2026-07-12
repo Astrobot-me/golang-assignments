@@ -11,11 +11,12 @@ import "fmt"
 
 const (
 	// TODO: define conversion constant(s)
+	factor = 9.0 / 5.0
 )
 
 func CelsiusToFahrenheit(celsius float64) float64 {
 	// TODO: implement
-	return 0
+	return celsius * factor + 32
 }
 
 func main() {

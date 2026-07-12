@@ -10,7 +10,11 @@ import "fmt"
 
 func CharFrequency(s string) map[rune]int {
 	// TODO: implement
-	return nil
+	ans := map[rune]int{}
+	for _, e := range s {
+		ans[e]++
+	}
+	return ans
 }
 
 func main() {

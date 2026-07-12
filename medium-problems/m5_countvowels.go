@@ -10,7 +10,13 @@ import "fmt"
 
 func CountVowels(s string) int {
 	// TODO: implement
-	return 0
+	count := 0
+	for _, c := range s {
+		if c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' {
+			count++
+		}
+	}
+	return count
 }
 
 func main() {

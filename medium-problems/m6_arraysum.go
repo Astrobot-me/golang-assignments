@@ -10,7 +10,11 @@ import "fmt"
 
 func ArraySum(arr [5]int) int {
 	// TODO: implement
-	return 0
+	sum := 0
+	for _, element := range arr {
+		sum += element
+	}
+	return sum
 }
 
 func main() {
