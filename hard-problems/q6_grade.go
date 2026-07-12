@@ -17,12 +17,36 @@ import "fmt"
 // Return both the average and the grade. If the slice is empty, return (0, "N/A").
 
 const (
-	// TODO: define grade boundary constants
+	GradeABoundary = 90
+	GradeBBoundary = 75
+	GradeCBoundary = 60
+	GradeDBoundary = 40
 )
 
-func GradeReport(scores []int) (average float64, grade string) {
+func GradeReport(scores []int) (avg float64, grade string) {
 	// TODO: implement
-	return 0, ""
+	if n := len(scores); n == 0 {
+		return 0, "N/A"
+	}
+	sum := 0
+	for _, e := range scores {
+		sum += e
+	}
+	avg = float64(sum / len(scores))
+	grade = ""
+
+	if avg >= GradeABoundary {
+		grade = "A"
+	} else if avg >= GradeBBoundary && avg < GradeABoundary {
+		grade = "B"
+	} else if avg >= GradeCBoundary && avg < GradeBBoundary {
+		grade = "C"
+
+	} else {
+		grade = "D"
+	}
+
+	return avg, grade
 }
 
 func main() {

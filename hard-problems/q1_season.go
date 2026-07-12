@@ -16,10 +16,28 @@ import "fmt"
 
 const (
 	// TODO: define season constants using iota
+	Winter = iota
+	Spring
+	Summer
+	Autumn
 )
 
 func GetSeason(month int) string {
 	// TODO: implement
+	switch month {
+	case 1, 2, 12:
+		return "Winter"
+
+	case 3, 4, 5:
+		return "Spring"
+
+	case 6, 7, 8:
+		return "Summer"
+	case 9, 10, 11:
+		return "Autumn"
+	default:
+		return "Invalid Month"
+	}
 	return ""
 }
 

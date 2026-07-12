@@ -10,9 +10,22 @@ import "fmt"
 // Do NOT use the sort package. Aim for a single pass over the array.
 // If the array has fewer than 2 distinct values, return (0, 0).
 
-func SecondMinMax(arr [10]int) (secondSmallest int, secondLargest int) {
+func SecondMinMax(arr [10]int) (int, int) {
 	// TODO: implement
-	return 0, 0
+	maxE := arr[0]
+	sMaxE := arr[0]
+	minE := arr[0]
+	sMinE := arr[0]
+
+	for _, e := range arr {
+
+		sMaxE = maxE
+		maxE = max(maxE, e)
+
+		sMinE = minE
+		minE = min(minE, e)
+	}
+	return sMaxE, sMinE
 }
 
 func main() {

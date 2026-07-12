@@ -16,7 +16,28 @@ import "fmt"
 
 func WordFrequencyCategory(words []string) map[string]string {
 	// TODO: implement
-	return nil
+	ans := map[string]string{}
+	freq := map[string]int{}
+
+	for _, e := range words {
+		freq[e]++
+
+	}
+	for _, e := range words {
+		frq := freq[e]
+
+		if frq == 1 {
+			ans[e] = "rare"
+		} else if frq == 2 || frq == 3 {
+			ans[e] = "common"
+
+		} else {
+			ans[e] = "frequent"
+		}
+
+	}
+
+	return ans
 }
 
 func main() {

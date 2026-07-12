@@ -13,8 +13,17 @@ import "fmt"
 // Example: RotateLeft([1,2,3,4,5], 2) -> [3,4,5,1,2]
 
 func RotateLeft(nums []int, k int) []int {
+
 	// TODO: implement
-	return nil
+
+	k = k % len(nums)
+	if k < 0 {
+		k += len(nums)
+	}
+	ans := []int{}
+	ans = append(ans, nums[k:]...)
+	ans = append(ans, nums[:k-1]...)
+	return ans
 }
 
 func main() {

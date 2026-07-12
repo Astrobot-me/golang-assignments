@@ -11,7 +11,19 @@ import "fmt"
 
 func RemoveDuplicates(nums []int) []int {
 	// TODO: implement
-	return nil
+	seen := map[int]bool{}
+	ans := []int{}
+
+	for _, e := range nums {
+		_, isPresent := seen[e]
+
+		if !isPresent {
+			ans = append(ans, e)
+			seen[e] = true
+		}
+
+	}
+	return ans
 }
 
 func main() {
