@@ -6,5 +6,22 @@ package practice
 // return nil.
 func ComposeFilters(nums []int, predicates ...func(int) bool) []int {
 	// TODO: implement
-	return nil
+	if len(predicates) == 0 {
+		return nums
+	}
+	ans := make([]int, 0)
+	for _, num := range nums {
+		sat := true
+		for _, fn := range predicates {
+			sat = sat && fn(num)
+		}
+
+		if sat {
+			ans = append(ans, num)
+		}
+	}
+	if len(ans) == 0 {
+		return nil
+	}
+	return ans
 }

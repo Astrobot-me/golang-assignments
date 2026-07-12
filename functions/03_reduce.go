@@ -6,5 +6,8 @@ package practice
 // initial unchanged.
 func ReduceSlice(nums []int, initial int, reducer func(acc, cur int) int) int {
 	// TODO: implement
-	return 0
+	for _, num := range nums {
+		initial = reducer(initial, num)
+	}
+	return initial
 }
