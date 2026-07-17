@@ -7,15 +7,15 @@ package practice
 //
 // Interview angle: explain why Increment MUST use a pointer receiver to
 // work correctly, and what would happen if it used a value receiver instead.
+
 type Counter struct {
 	Count int
 }
 
 func (c *Counter) Increment() {
-	// TODO: implement
+	c.Count++
 }
 
 func (c Counter) Value() int {
-	// TODO: implement
-	return 0
+	return c.Count
 }
