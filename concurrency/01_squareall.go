@@ -1,5 +1,9 @@
 package practice
 
+import (
+	"sync"
+)
+
 // Concepts: goroutines, sync.WaitGroup
 //
 // Task:
@@ -18,5 +22,23 @@ package practice
 
 func SquareAll(nums []int) []int {
 	// TODO: implement
-	return nil
+	// ctx Counter
+	var w sync.WaitGroup
+	ans := make([]int, len(nums))
+	for idx, i := range nums {
+		w.Add(1)
+
+		go func() {
+			// defer w.Done()
+			ans[idx] = Squaure(i, &w)
+		}()
+	}
+
+	w.Wait()
+	return ans
+}
+
+func Squaure(num int, w *sync.WaitGroup) int {
+	defer w.Done()
+	return num * num
 }

@@ -1,5 +1,7 @@
 package practice
 
+import "sync"
+
 // Concepts: unbuffered channels, send/receive, goroutines
 //
 // Task:
@@ -14,6 +16,46 @@ package practice
 // the receive cannot complete before the goroutine has finished its half.
 
 func SumParallel(nums []int) int {
+
+	var w sync.WaitGroup
 	// TODO: implement
-	return 0
+	slice1 := nums[:len(nums)/2]
+	slice2 := nums[len(nums)/2:]
+
+	var sum int
+
+	ch := make(chan int, 2)
+
+	if len(slice1) > 0 {
+		w.Add(1)
+
+		go func() {
+			ch <- SumAll(slice1, &w)
+		}()
+	}
+
+	if len(slice2) > 0 {
+		w.Add(1)
+
+		go func() {
+			ch <- SumAll(slice2, &w)
+		}()
+	}
+
+	w.Wait()
+	close(ch)
+
+	for i := range ch {
+		sum += i
+	}
+	return sum
+}
+
+func SumAll(nums []int, w *sync.WaitGroup) int {
+	defer w.Done()
+	sum := 0
+	for _, i := range nums {
+		sum += i
+	}
+	return sum
 }
