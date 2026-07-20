@@ -1,5 +1,7 @@
 package practice
 
+import "sync"
+
 // Concepts: worker pools, buffered channels, closing to signal "no more work"
 //
 // Task:
@@ -17,5 +19,43 @@ package practice
 
 func WorkerPool(jobs []int, workers int, fn func(int) int) []int {
 	// TODO: implement
-	return nil
+
+	jobCh := make(chan int, len(jobs))
+	resCh := make(chan int, len(jobs))
+
+	var wg sync.WaitGroup
+
+	for _, i := range jobs {
+
+		jobCh <- i
+
+	}
+
+	close(jobCh)
+
+	wg.Add(workers)
+	for range workers {
+
+		go func() {
+
+			defer wg.Done()
+
+			for i := range jobCh {
+
+				resCh <- fn(i)
+
+			}
+		}()
+	}
+
+	wg.Wait()
+	close(resCh)
+
+	res := make([]int, 0)
+
+	for r := range resCh {
+		res = append(res, r)
+	}
+
+	return res
 }
