@@ -13,7 +13,7 @@ import (
 func main() {
 	// 1. Load the CA's PUBLIC key. This is the entire basis of trust:
 	//    "I will accept anyone whose cert was signed by this key."
-	caPubBytes, err := os.ReadFile("ca.pub")
+	caPubBytes, err := os.ReadFile("host_cert.pub")
 	if err != nil {
 		panic(err)
 	}
@@ -74,7 +74,7 @@ func main() {
 
 // loadHostCertSigner reads host_key.pem + host_cert.pub and wraps them together.
 func loadHostCertSigner() (ssh.Signer, error) {
-	keyBytes, err := os.ReadFile("host_key.pem")
+	keyBytes, err := os.ReadFile("ca_key.pem")
 	if err != nil {
 		return nil, err
 	}
