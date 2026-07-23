@@ -23,13 +23,15 @@ func main() {
 		panic(err)
 	}
 
-	sshPub, err := ssh.NewPublicKey(priv.Public())
+	caSigner, err := ssh.NewSignerFromKey(priv)
 
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println(string(ssh.MarshalAuthorizedKey(sshPub)))
+	if err := mintHostCert(caSigner); err != nil {
+		panic(err)
+	}
 
 }
 
@@ -119,8 +121,8 @@ func mintHostCert(caSigner ssh.Signer) error {
 		CertType:        ssh.HostCert,
 		KeyId:           "toy-server",
 		ValidPrincipals: []string{"localhost", "127.0.0.1"},
-		ValidBefore:     uint64(now.Add(-1 * time.Minute).Unix()),
-		ValidAfter:      uint64(now.Add(1 * time.Minute).Unix()),
+		ValidAfter:      uint64(now.Add(-1 * time.Minute).Unix()),
+		ValidBefore:     uint64(now.Add(1 * time.Minute).Unix()),
 	}
 
 	if err := hostCert.SignCert(rand.Reader, caSigner); err != nil {

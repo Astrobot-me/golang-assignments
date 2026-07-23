@@ -1,0 +1,1 @@
+ssh-keygen -L -f host_cert.pub
